@@ -6,16 +6,43 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" ></script>
     <style>
-      var rustred = #cb3b0a
-      .a {
-        font-size: 2em;
-        font-family: 'Lato', sans-serif;
-        fill: rustred;
+      circle {
+        fill: #cb3b0a;
       }
     </style>
   </head>
   <body>
     <script>
+
+      var outerWidth = 350;
+      var outerHeight = 350;
+      var circleRadius = 2;
+      var xColumn = "urban";
+      var yColumn = "rural";
+
+      var svg = d3.select("body").append("svg")
+        .attr("width", outerWidth)
+        .attr("height", outerHeight);
+
+      var xScale = d3.scale.linear()
+                      .range([0, outerWidth]);
+      var yScale = d3.scale.linear()
+                      .range([outerHeight, 0]);
+
+      function render(data){
+        xScale.domain(d3.extent(data, function(d){ return d[xColumn]; }));
+        yScale.domain(d3.extent(data, function(d){ return d[yColumn]; }));
+
+        var circle = svg.selectAll("circle").data(data);
+        circle.enter().append("circle").attr("r", circleRadius);
+
+        circle
+          .attr("cx", function(d){return xScale(d[xColumn]); })
+          .attr("cy", function(d){return yScale(d[yColumn]); });
+
+        circle.exit().remove();
+      }
+
       function type(d){
         d.urban = +d.urban;
         d.urbanInd = +d.urbanInd;
@@ -25,11 +52,7 @@
         d.indexR = +d.indexR;
         return d;
       }
-      d3.csv("UrbanRuralIncomePer.csv", type, function(data){
-        var max = d3.max(data, function(d){return d.urban; });
-        var min = d3.min(data, function(d){return d.urban; });
-        console.log([max, min]);
-      })
+      d3.csv("UrbanRuralIncomePer.csv", type, render);
     </script>
 
   </body>
