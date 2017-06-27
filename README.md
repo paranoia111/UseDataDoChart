@@ -1,5 +1,5 @@
 # UseDataDoChart
-Use data file to draw a chart with D3 follow curran
+Use csv file to draw a scatter graph with D3 way code following curran
 ---------------------------------------
 With Urban & Rural Income data(1978-2015), try some real D3 and still work on definitions as follows:
 + Scale
