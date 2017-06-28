@@ -21,12 +21,15 @@
     var yColumn = "RuralWage";
     var innerWidth  = outerWidth  - margin.left - margin.right;
     var innerHeight = outerHeight - margin.top  - margin.bottom;
+    var barpadding = 0.2;
+
+
     var svg = d3.select("body").append("svg")
                   .attr("width",  outerWidth)
                   .attr("height", outerHeight);
     var g = svg.append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    var xScale = d3.scale.ordinal().rangeBands([0, innerWidth]);
+    var xScale = d3.scale.ordinal().rangeBands([0, innerWidth], barpadding);
     var yScale = d3.scale.linear().range([innerHeight, 0]);
 
     function render(data){
