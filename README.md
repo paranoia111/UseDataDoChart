@@ -1,7 +1,7 @@
 # UseDataDoChart
-Use csv file to draw a scatter graph with D3 way code following curran
+Use csv file to draw chart in a D3 way code following curran
 ---------------------------------------
-With Urban & Rural Income data(1978-2015), try some real D3 and still work on definitions as follows:
+In the scatter plot, with Urban & Rural Income data(1978-2015), try some real D3 and still work on definitions as follows:
 + Scale
 > + Any common standard to choose the proper scale? sqrt/linear/log
 > + But at least, Bar chart has its perfect one, Ordinal Scale.
