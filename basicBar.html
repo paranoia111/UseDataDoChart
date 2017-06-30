@@ -6,9 +6,21 @@
     <title>Basic Bar</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <style>
-      #ff6c5c
+      rect {
+      fill: #ff6c5c;
+    }
 
-      #60b2d0
+      .axis path, .axis line {
+        fill: none;
+        stroke: gray;
+        shape-rendering: crispEdges;
+      }
+
+      .y.axis path, .y.axis line {
+        stroke: gray;
+      }
+
+
 
     </style>
   </head>
@@ -30,15 +42,21 @@
     var g = svg.append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     var xAxisG = g.append("g")
+        .attr("class", "x axis")
         .attr("transform", "translate(0, " + innerHeight + ")");
-    var yAxisG = g.append("g");
+    var yAxisG = g.append("g")
+        .attr("class", "y axis");
 
 
     var xScale = d3.scale.ordinal().rangeBands([0, innerWidth], barpadding);
     var yScale = d3.scale.linear().range([innerHeight, 0]);
 
-    var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-    var yAxis = d3.svg.axis().scale(yScale).orient("left");
+    var xAxis = d3.svg.axis().scale(xScale).orient("bottom")
+        .innerTickSize(10)
+        .outerTickSize(0);
+    var yAxis = d3.svg.axis().scale(yScale).orient("left")
+        .tickFormat(d3.format("s"))
+        .outerTickSize(0);
 
     function render(data){
 
